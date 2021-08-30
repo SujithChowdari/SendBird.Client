@@ -7,6 +7,7 @@ class SendBirdEvent {
     this.key = uuid4();
     this._createChannelHandler();
 
+    this.onChannelCreated = null;
     this.onChannelChanged = null;
     this.onUserJoined = null;
     this.onUserLeft = null;
@@ -19,6 +20,11 @@ class SendBirdEvent {
     handler.onChannelChanged = channel => {
       if (this.onChannelChanged) {
         this.onChannelChanged(channel);
+      }
+    };
+    handler.onChannelCreated = channel => {
+      if (this.onChannelCreated) {
+        this.onChannelCreated(channel);
       }
     };
     handler.onUserJoined = (groupChannel, user) => {
